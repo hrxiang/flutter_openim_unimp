@@ -1,0 +1,76 @@
+group 'io.openim.flutter_openim_unimp'
+version '1.0'
+
+def dir = getCurrentProjectDir()
+
+def getCurrentProjectDir() {
+    String result = ""
+    rootProject.allprojects { project ->
+        if (project.properties.get("name").toString() == "flutter_openim_unimp") {
+            result = project.properties.get("projectDir").toString()
+        }
+    }
+    return result
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        maven { url "$dir/libs" }
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+    }
+}
+//导入aar需要的配置
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    //导入SDK相关依赖jar、aar
+    implementation 'unimp:android-gif-drawable-release:1.0.0@aar'
+    implementation 'unimp:base_oaid_sdk:1.0.0@aar'
+    implementation 'unimp:Bluetooth-release:1.0.0@aar'
+    implementation 'unimp:breakpad-build-release:1.0.0@aar'
+    implementation 'unimp:contacts-release:1.0.0@aar'
+    implementation 'unimp:fingerprint-release:1.0.0@aar'
+    implementation 'unimp:iBeacon-release:1.0.0@aar'
+    implementation 'unimp:messaging-release:1.0.0@aar'
+    implementation 'unimp:sqlite-release:1.0.0@aar'
+    implementation 'unimp:uniapp-v8-release:1.0.0@aar'
+    implementation 'unimp:uniMPSDK-V2-release:1.0.0@aar'
+
+    implementation 'androidx.recyclerview:recyclerview:1.0.0' //必须集成
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0' //必须集成
+    implementation 'androidx.appcompat:appcompat:1.0.0' //必须集成
+    implementation 'com.alibaba:fastjson:1.1.46.android' //必须集成
+    implementation 'com.facebook.fresco:fresco:2.5.0'//必须集成
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'//必须集成
+    implementation 'com.github.bumptech.glide:glide:4.9.0'//必须集成
+}
