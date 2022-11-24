@@ -17,6 +17,11 @@ class FlutterOpenimUnimp {
     required String appID,
     required String wgtPath,
     String? password,
+    Map<String, dynamic>? extraData,
+    Map<String, dynamic>? arguments,
+    String? redirectPath,
+    String? path,
+    String? splashClassName,
   }) {
     return _channel.invokeMethod(
       'releaseWgtToRunPath',
@@ -24,6 +29,11 @@ class FlutterOpenimUnimp {
         'appID': appID,
         'wgtPath': wgtPath,
         'password': password,
+        'extraData': extraData,
+        'arguments': arguments,
+        'redirectPath': redirectPath,
+        'path': path,
+        'splashClassName': splashClassName,
       },
     );
   }

@@ -62,7 +62,7 @@ public class FlutterOpenimUnimpPlugin implements FlutterPlugin, MethodCallHandle
                 if (code == 1) {
                     //释放wgt完成
                     try {
-                        IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID);
+                        IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID, parseConfiguration(call));
                         mUniMPCaches.put(uniMP.getAppid(), uniMP);
                         result.success(true);
                     } catch (Exception e) {
@@ -77,36 +77,7 @@ public class FlutterOpenimUnimpPlugin implements FlutterPlugin, MethodCallHandle
         } else if ("openUniMP".equals(call.method)) {
             try {
                 String appID = call.argument("appID");
-                UniMPOpenConfiguration uniMPOpenConfiguration = new UniMPOpenConfiguration();
-                try {
-                    Map<String, Object> extraData = call.argument("extraData");
-                    if (null != extraData) {
-                        Set<Map.Entry<String, Object>> entries = extraData.entrySet();
-                        for (Map.Entry<String, Object> entry : entries) {
-                            uniMPOpenConfiguration.extraData.put(entry.getKey(), entry.getValue());
-                        }
-                    }
-                    Map<String, Object> arguments = call.argument("arguments");
-                    if (null != arguments) {
-                        Set<Map.Entry<String, Object>> entries = arguments.entrySet();
-                        for (Map.Entry<String, Object> entry : entries) {
-                            uniMPOpenConfiguration.arguments.put(entry.getKey(), entry.getValue());
-                        }
-                    }
-                    uniMPOpenConfiguration.redirectPath = call.argument("redirectPath");
-                    uniMPOpenConfiguration.path = call.argument("path");
-                    String splashClass = call.argument("splashClassName");
-                    if (null != splashClass) {
-                        try {
-                            uniMPOpenConfiguration.splashClass = Class.forName(splashClass);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID, uniMPOpenConfiguration);
+                IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID, parseConfiguration(call));
                 mUniMPCaches.put(uniMP.getAppid(), uniMP);
                 result.success(true);
             } catch (Exception e) {
@@ -199,5 +170,42 @@ public class FlutterOpenimUnimpPlugin implements FlutterPlugin, MethodCallHandle
             //回传数据给小程序
             callback.invoke("收到消息");
         });
+    }
+
+    private static UniMPOpenConfiguration parseConfiguration(MethodCall call) {
+        UniMPOpenConfiguration uniMPOpenConfiguration = new UniMPOpenConfiguration();
+        try {
+            Map<String, Object> extraData = call.argument("extraData");
+            if (null != extraData) {
+                Set<Map.Entry<String, Object>> entries = extraData.entrySet();
+                for (Map.Entry<String, Object> entry : entries) {
+                    uniMPOpenConfiguration.extraData.put(entry.getKey(), entry.getValue());
+                }
+            }
+
+            Map<String, Object> arguments = call.argument("arguments");
+            if (null != arguments) {
+                Set<Map.Entry<String, Object>> entries = arguments.entrySet();
+                for (Map.Entry<String, Object> entry : entries) {
+                    uniMPOpenConfiguration.arguments.put(entry.getKey(), entry.getValue());
+                }
+            }
+
+            uniMPOpenConfiguration.redirectPath = call.argument("redirectPath");
+
+            uniMPOpenConfiguration.path = call.argument("path");
+
+            String splashClass = call.argument("splashClassName");
+            if (null != splashClass) {
+                try {
+                    uniMPOpenConfiguration.splashClass = Class.forName(splashClass);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return uniMPOpenConfiguration;
     }
 }
