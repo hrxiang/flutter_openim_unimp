@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 
+/// SDK-Android@3.6.18-20230129
 class FlutterOpenimUnimp {
   static const _channel = MethodChannel('flutter_openim_unimp');
 
