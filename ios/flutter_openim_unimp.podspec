@@ -13,20 +13,12 @@ A new Flutter plugin project.
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/UniMPSDK/Core/Headers/*','Classes/*.{h,m}'
-  s.public_header_files = 'Classes/UniMPSDK/Core/Headers/*','Classes/*.h'
+  s.source_files = 'Classes/**/*.{h,m}'
+  s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.platform = :ios, '13.0'
+  s.dependency 'OUniMPSDK'
 
-  s.resource_bundles = {
-    'Resources' => ['Classes/UniMPSDK/Core/Resources/*'],
-  }
-
-  s.vendored_libraries = 'Classes/**/*.a'
-  s.vendored_frameworks = 'Classes/**/*.framework'
-  s.frameworks = 'JavaScriptCore', 'CoreMedia', 'MediaPlayer', 'AVFoundation', 'AVKit', 'GLKit', 'OpenGLES', 'CoreText', 'QuartzCore', 'CoreGraphics', 'QuickLook', 'CoreTelephony', 'AssetsLibrary', 'CoreLocation', 'AddressBook'
-  
-  s.static_framework = true
+  s.platform = :ios, '11.0'
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
 end
