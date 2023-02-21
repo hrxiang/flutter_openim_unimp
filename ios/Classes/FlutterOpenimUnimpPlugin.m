@@ -1,5 +1,5 @@
 #import "FlutterOpenimUnimpPlugin.h"
-#import "UniMPSDK/Core/Headers/DCUniMP.h"
+#import "DCUniMP.h"
 
 @implementation FlutterOpenimUnimpPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
