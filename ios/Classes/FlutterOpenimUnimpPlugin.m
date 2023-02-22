@@ -22,7 +22,7 @@
     if ([call.method isEqualToString:@"releaseWgtToRunPath"]) {
         NSString *appID = call.arguments[@"appID"];
         NSString *wgtPath = call.arguments[@"wgtPath" ];
-        NSString *password = call.arguments[@"password"];
+        NSString *password = [call.arguments[@"password"]isEqual:[NSNull null]] ? nil : call.arguments[@"password"];
         NSError *err = nil;
         
         BOOL r = [DCUniMPSDKEngine installUniMPResourceWithAppid:appID
