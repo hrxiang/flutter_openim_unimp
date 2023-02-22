@@ -62,8 +62,8 @@ public class FlutterOpenimUnimpPlugin implements FlutterPlugin, MethodCallHandle
                 if (code == 1) {
                     //释放wgt完成
                     try {
-                        IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID, parseConfiguration(call));
-                        mUniMPCaches.put(uniMP.getAppid(), uniMP);
+//                        IUniMP uniMP = DCUniMPSDK.getInstance().openUniMP(context, appID, parseConfiguration(call));
+//                        mUniMPCaches.put(uniMP.getAppid(), uniMP);
                         result.success(true);
                     } catch (Exception e) {
                         e.printStackTrace();

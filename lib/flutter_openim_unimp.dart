@@ -14,27 +14,27 @@ class FlutterOpenimUnimp {
     return _channel.invokeMethod<bool>('isInitialize');
   }
 
-  Future releaseWgtToRunPath({
+  Future<bool?> releaseWgtToRunPath({
     required String appID,
     required String wgtPath,
     String? password,
-    Map<String, dynamic>? extraData,
-    Map<String, dynamic>? arguments,
-    String? redirectPath,
-    String? path,
-    String? splashClassName,
+    // Map<String, dynamic>? extraData,
+    // Map<String, dynamic>? arguments,
+    // String? redirectPath,
+    // String? path,
+    // String? splashClassName,
   }) {
-    return _channel.invokeMethod(
+    return _channel.invokeMethod<bool>(
       'releaseWgtToRunPath',
       {
         'appID': appID,
         'wgtPath': wgtPath,
         'password': password,
-        'extraData': extraData,
-        'arguments': arguments,
-        'redirectPath': redirectPath,
-        'path': path,
-        'splashClassName': splashClassName,
+        // 'extraData': extraData,
+        // 'arguments': arguments,
+        // 'redirectPath': redirectPath,
+        // 'path': path,
+        // 'splashClassName': splashClassName,
       },
     );
   }
